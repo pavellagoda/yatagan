@@ -4,6 +4,7 @@
 	import flash.display.Loader;
 	import flash.net.URLRequest;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 
 	public class Item extends MovieClip
 	{
@@ -16,9 +17,11 @@
 			this.i = i;
 			this.angle = i*((Math.PI*2)/Main.pathList.length);
 			var loader:Loader = new Loader();
-			loader.load(new URLRequest('img/'+Main.pathList[i]));
+			loader.load(new URLRequest('img/'+Main.pathList[i].url));
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onImageLoad);
 			this.buttonMode = true
+			this.addEventListener(MouseEvent.ROLL_OVER, function(){Main.showNote(Main.pathList[i].name)})
+			this.addEventListener(MouseEvent.ROLL_OUT, function(){Main.hideNote()})
 		}
 
 		private function onImageLoad(evt)
@@ -32,7 +35,7 @@
 		private function addShadow()
 		{
 			var duplicate:Loader = new Loader();
-			duplicate.load(new URLRequest('img/'+Main.pathList[i]));
+			duplicate.load(new URLRequest('img/'+Main.pathList[i].url));
 			duplicate.contentLoaderInfo.addEventListener(Event.COMPLETE, onDuplicateLoad);
 		}
 		private function onDuplicateLoad(evt)
