@@ -31,14 +31,17 @@
 		private var fade = 1;
 		private static var countLoadedImages = 0;
 		private static var _stage;
+		private static var name_txt;
 
 		public function Main()
 		{
 			carousel = new Carousel();
 			carousel.visible = false;
 			this.addChild(carousel);
-			trace(name_txt)
-			this.addChild(name_txt);
+			
+			var text_mc = new Text();
+			addChild(text_mc)
+			name_txt = text_mc.getChildAt(0);
 			
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.align = StageAlign.TOP_LEFT;
@@ -69,13 +72,6 @@
 			carousel.x =  _stage.stageWidth/2;
 			name_txt.x = _stage.stageWidth/2 - name_txt.width/2;
 			name_txt.y = centerY - 180;
-		}
-		
-		public static function duplicateDisplayObject(target:MovieClip):MovieClip {
-			var targetClass:Class = Object(target).constructor;
-			var duplicate:MovieClip = new targetClass();
-			target.parent.addChild(duplicate);
-			return duplicate;
 		}
 		
 		public static function showNote(text) {
